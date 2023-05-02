@@ -1,6 +1,5 @@
 package com.example.no_name.config;
 
-import com.example.no_name.utils.plugin.SqlExecutorPlugin;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -44,8 +43,8 @@ public class DatasourceConfig {
         @Bean
         public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource, ApplicationContext applicationContext) throws Exception {
             SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-            SqlExecutorPlugin sqlExecutorPlugin = new SqlExecutorPlugin(applicationContext);
-            sqlSessionFactoryBean.setPlugins(new Interceptor[]{sqlExecutorPlugin});
+            //SqlExecutorPlugin sqlExecutorPlugin = new SqlExecutorPlugin(applicationContext);
+            //sqlSessionFactoryBean.setPlugins(new Interceptor[]{sqlExecutorPlugin});
             sqlSessionFactoryBean.setDataSource(dataSource);
             sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:sql/**/*.xml"));
             sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
