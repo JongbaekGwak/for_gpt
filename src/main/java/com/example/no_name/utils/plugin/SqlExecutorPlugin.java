@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.Executable;
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -157,7 +156,7 @@ public class SqlExecutorPlugin implements Interceptor {
                 logger.debug("Query param is {}", paramObj.getClass().getCanonicalName());
                 List<ParameterMapping> mappings = boundSql.getParameterMappings();
 
-                if (NoNameUtil.isNumberTypeClass(paramObj)) {
+                if (NoNameUtil.isNumberType(paramObj)) {
                     bindSql = bindSql.replaceFirst("\\?", paramObj.toString());
                 } else if (paramObj instanceof String) {
                     bindSql = bindSql.replaceFirst("\\?", "'" + paramObj + "'");
@@ -174,7 +173,7 @@ public class SqlExecutorPlugin implements Interceptor {
                                 break;
                             }
 
-                            if (NoNameUtil.isNumberTypeClass(value)) {
+                            if (NoNameUtil.isNumberType(value)) {
                                 bindSql = replaceFirstQuestionMark(bindSql, qidx, value.toString());
                                 fromIndex = qidx + (value.toString().length());
                             } else {
